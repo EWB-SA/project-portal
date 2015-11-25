@@ -2,4 +2,4 @@ Router.configure({
 	layoutTemplate: 'layout'
 });
 
-Router.route('/', {name: 'splashPage'})
+Router.route('/', {name: 'projectsList'})
