@@ -1,5 +1,6 @@
 Router.configure({
-	layoutTemplate: 'layout'
+	layoutTemplate: 'layout',
+	loadingTemplate: 'loading'
 });
 
 Router.route('/', {name: 'projectsList'});
@@ -12,3 +13,17 @@ Router.route('/projects/:_id', {
 Router.route('/create-project', {
 	name: 'createProject'
 });
+
+var requireLogin = function() {
+	if (! Meteor.user()) {
+		if (Meteor.loggingIn()) {
+			this.render(this.loadingTemplate);
+		} else {
+			this.render('accessDenied');
+		}
+	} else {
+		this.next();
+	}
+}
+
+Router.onBeforeAction(requireLogin, {only: 'createProject'});
