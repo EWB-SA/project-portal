@@ -26,4 +26,6 @@ var requireLogin = function() {
 	}
 }
 
+Router.onBeforeAction('dataNotFound', {only: 'postPage'});
+
 Router.onBeforeAction(requireLogin, {only: 'createProject'});

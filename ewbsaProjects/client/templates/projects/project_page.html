@@ -1,7 +1,19 @@
 <template name ="projectPage">
 	<div class = "project-page container">
 		<div class = "row">
-			{{> projectThumb}}
+			<div class = "col-xs-12">
+				<img src = "/images/project_cover.jpg" class = 'img-responsive'>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<h1>{{name}}</h1>
+				<p>{{blurb}}</p>
+			</div>
+			<div class="col-md-9">
+				<h3>Summary</h3>
+				<p>{{summary}}</p>
+			</div>
 		</div>
 	</div>
 </template>
