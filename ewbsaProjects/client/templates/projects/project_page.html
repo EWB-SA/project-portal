@@ -15,5 +15,10 @@
 				<p>{{summary}}</p>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				{{#if projectCreator}}<a class = "btn btn-primary" href="{{pathFor 'editProject'}}">Edit</a>{{/if}}
+			</div>
+		</div>
 	</div>
 </template>

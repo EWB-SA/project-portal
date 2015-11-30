@@ -1,9 +1,8 @@
 Projects = new Mongo.Collection('projects');
 
 Projects.allow({
-	insert: function(userId, doc){
-		return !! userId;
-	}
+	update: function(userId, project) {return ownsDocument(userId, project);},
+	remove: function(userId, project) {return ownsDocument(userId, project);}
 });
 
 Meteor.methods({
