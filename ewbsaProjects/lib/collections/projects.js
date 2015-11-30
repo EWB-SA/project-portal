@@ -5,6 +5,13 @@ Projects.allow({
 	remove: function(userId, project) {return ownsDocument(userId, project);}
 });
 
+Projects.deny({
+	update: function(userId, project, fieldNames) {
+		//user may only edit the follwing fields:
+		return (_.without(fieldNames, 'name', 'blurb', 'summary').length > 0);
+	}
+});
+
 Meteor.methods({
 	projectInsert: function(postAttributes){
 		check(Meteor.userId(), String);

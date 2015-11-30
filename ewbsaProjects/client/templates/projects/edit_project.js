@@ -5,7 +5,7 @@ Template.editProject.events({
 		var projectProperties = {
 			name: $(e.target).find('#project-name').val(),
 			blurb: $(e.target).find('#project-blurb').val(),
-			summary: $(e.target).find('#project-summary').text()
+			summary: $(e.target).find('#project-summary').val()
 		}
 		Projects.update(currentProjectId, {$set: projectProperties}, function(error) {
 			if (error) {
