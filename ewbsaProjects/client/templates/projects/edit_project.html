@@ -1,17 +1,20 @@
 <template name="editProject">
 	<div class="container">
 		<form>
-			<div class="form-group">
+			<div class="form-group {{errorClass 'name'}}">
 				<label for="project-name">Project Name</label>
 				<input type="text" class="form-control" id="project-name" value="{{name}}">
+				<span class="help-block">{{errorMessage 'name'}}</span>
 			</div>
-			<div class="form-group">
+			<div class="form-group {{errorClass 'blurb'}}">
 				<label for="project-blurb">Project Blurb</label>
 				<input type=text class="form-control" id="project-blurb" value="{{blurb}}">
+				<span class="help-block">{{errorMessage 'blurb'}}</span>
 			</div>
-			<div class="form-group">
+			<div class="form-group {{errorClass 'summary'}}">
 				<label for="project-summary">Project Summary</label>
 				<textarea name="project-summary" id="project-summary" class="form-control">{{summary}}</textarea>
+				<span class="help-block">{{errorMessage 'summary'}}</span>
 			</div>
 			<input type="submit" value="Submit" class="btn btn-primary"/>
 			<hr/>

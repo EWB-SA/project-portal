@@ -1,3 +1,16 @@
+Template.editProject.onCreated(function() {
+	Session.set('editProjectErrors', {});
+});
+
+Template.editProject.helpers({
+	errorMessage: function(field){
+		return Session.get('editProjectErrors')[field];
+	},
+	errorClass: function(field) {
+		return !!Session.get('editProjectErrors')[field] ? 'has-error' : '';
+	}
+});
+
 Template.editProject.events({
 	'submit form': function(e) {
 		e.preventDefault();
@@ -7,6 +20,12 @@ Template.editProject.events({
 			blurb: $(e.target).find('#project-blurb').val(),
 			summary: $(e.target).find('#project-summary').val()
 		}
+
+		var errors = validateProject(projectProperties);
+		if (errors.name || errors.blurb || errors.summary) {
+			return Session.set('editProjectErrors', errors);
+		}
+
 		Projects.update(currentProjectId, {$set: projectProperties}, function(error) {
 			if (error) {
 				// display the error to the user

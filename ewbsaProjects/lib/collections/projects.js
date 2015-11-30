@@ -12,6 +12,13 @@ Projects.deny({
 	}
 });
 
+Projects.deny({
+	update: function(userId, project, fieldNames, moodifier) {
+		var errors = validateProject(modifier.$set);
+		return errors.name || errors.blurb || errors.summary;
+	}
+});
+
 Meteor.methods({
 	projectInsert: function(postAttributes){
 		check(Meteor.userId(), String);
@@ -19,7 +26,12 @@ Meteor.methods({
 			name: String,
 			blurb: String,
 			summary: String
-		})
+		});
+
+		var errors = validateProject(postAttributes);
+		if (errors.name || errors.blurb || errors.summary) {
+			throw new Meteor.Error('invalid-post', "You have incomplete fields in your submmission.");
+		}
 
 		var user = Meteor.user();
 		var project = _.extend(postAttributes, {
@@ -34,3 +46,21 @@ Meteor.methods({
 		};
 	}
 });
+
+validateProject = function(project) {
+	var errors = {};
+
+	if (!project.name){
+		errors.name = "Please give your project a name.";
+	}
+
+	if (!project.blurb){
+		errors.blurb = "Please give your project a blurb.";
+	}
+
+	if (!project.summary){
+		errors.summary = "Please give your project a summary.";
+	}
+
+	return errors;
+};
